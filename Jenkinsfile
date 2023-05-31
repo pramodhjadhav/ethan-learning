@@ -1,8 +1,11 @@
 pipeline {
     agent any
+	parameters {
+	 string(name :'version',defaultValue:'',description: 'version to deploy on prod')
+	 choice(name :'version',choices:['dev','stage','prod'],description: '')
+	}
 	environment{
-	 new_env: 'DEV'		
-			
+	 new_env: 'DEV'				
 	}
     stages {
         stage('build') {
