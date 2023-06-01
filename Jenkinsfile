@@ -5,12 +5,12 @@ pipeline {
 		choice(name: 'executesTests',choices: ['dev','stage','prod'],description: '')
 	  }
 	environment {
-	 new_env: 'DEV'				
+	    VERSION = '1.1'				
 	}
     stages {
         stage('build') {
             steps {
-                echo "Hello build env ${new_env} World"
+                echo "Hello build env ${VERSION} World"
             }
         }
         stage('test') {
@@ -20,12 +20,12 @@ pipeline {
 			 } 
 		 }
             steps {
-                echo "Hello test ${new_env} World"
+                echo "Hello test ${VERSION} World"
             }
         }
         stage('deploy') {
             steps {
-                echo "Hello deploy  ${new_env} World"
+                echo "Hello deploy  ${ VERSION } World"
 				echo "Hello deploy  ${params.VERSION} World"
             }
         }
