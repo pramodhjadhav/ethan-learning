@@ -1,9 +1,9 @@
 pipeline {
     agent any
 	parameters {
-	 boolean(name :'VERSION',defaultValue:'true',description: '')
-	 choice(name :'executesTests',choices:['dev','stage','prod'],description: '')
-	}
+		booleanParam(name: 'VERSION',defaultValue: 'true',description: '')
+		choice(name: 'executesTests',choices: ['dev','stage','prod'],description: '')
+	  }
 	environment {
 	 new_env: 'DEV'				
 	}
