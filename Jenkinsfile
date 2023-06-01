@@ -1,10 +1,10 @@
 pipeline {
     agent any
 	parameters {
-	 string(name :'version',defaultValue:'',description: 'version to deploy on prod')
-	 choice(name :'version',choices:['dev','stage','prod'],description: '')
+	 boolean(name :'VERSION',defaultValue:'true',description: '')
+	 choice(name :'executesTests',choices:['dev','stage','prod'],description: '')
 	}
-	environment{
+	environment {
 	 new_env: 'DEV'				
 	}
     stages {
@@ -14,6 +14,11 @@ pipeline {
             }
         }
         stage('test') {
+		 when {
+		     expression {
+			   params.executesTests
+			 } 
+		 }
             steps {
                 echo "Hello test ${new_env} World"
             }
@@ -21,6 +26,7 @@ pipeline {
         stage('deploy') {
             steps {
                 echo "Hello deploy  ${new_env} World"
+				echo "Hello deploy  ${params.VERSION} World"
             }
         }
     }
